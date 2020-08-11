@@ -127,19 +127,19 @@ div3.innerHTML = "3";
 var div4 = document.createElement('div');
 div4.innerHTML = "4";
 var routeTable = {
-  '/1': div1,
-  '/2': div2,
-  '/3': div3,
-  '/4': div4
+  '#1': div1,
+  '#2': div2,
+  '#3': div3,
+  '#4': div4
 };
 route();
 
 function route() {
-  var number = window.localStorage.getItem('x');
+  var number = window.location.hash;
   console.log(number);
 
   if (!number) {
-    number = '/1';
+    number = '1';
   }
 
   var div = routeTable[number];
@@ -154,43 +154,9 @@ function route() {
   app.appendChild(div);
 }
 
-var allA = document.querySelectorAll('a');
-var _iteratorNormalCompletion = true;
-var _didIteratorError = false;
-var _iteratorError = undefined;
-
-try {
-  var _loop = function _loop() {
-    var a = _step.value;
-    a.addEventListener('click', function (e) {
-      e.preventDefault();
-      var href = a.getAttribute('href');
-      window.localStorage.setItem('x', href);
-      onstatechange();
-    });
-  };
-
-  for (var _iterator = allA[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-    _loop();
-  }
-} catch (err) {
-  _didIteratorError = true;
-  _iteratorError = err;
-} finally {
-  try {
-    if (!_iteratorNormalCompletion && _iterator.return != null) {
-      _iterator.return();
-    }
-  } finally {
-    if (_didIteratorError) {
-      throw _iteratorError;
-    }
-  }
-}
-
-function onstatechange() {
+window.addEventListener('hashchange', function () {
   route();
-}
+});
 },{}],"../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

@@ -11,19 +11,19 @@ const div4 = document.createElement('div')
 div4.innerHTML = `4`
 
 const routeTable = {
-    '/1': div1,
-    '/2': div2,
-    '/3': div3,
-    '/4': div4
+    '#1': div1,
+    '#2': div2,
+    '#3': div3,
+    '#4': div4
 }
 
 route()
 
 function route() {
-    let number = window.localStorage.getItem('x')
+    let number = window.location.hash
     console.log(number)
     if (!number) {
-        number = '/1'
+        number = '1'
     }
     let div = routeTable[number]
     if (!div) {
@@ -35,16 +35,6 @@ function route() {
     app.appendChild(div)
 }
 
-const allA = document.querySelectorAll('a')
-for (let a of allA) {
-    a.addEventListener('click', (e) => {
-        e.preventDefault()
-        const href = a.getAttribute('href')
-        window.localStorage.setItem('x', href)
-        onstatechange()
-    })
-}
-
-function onstatechange() {
+window.addEventListener('hashchange', () => {
     route()
-}
+})
