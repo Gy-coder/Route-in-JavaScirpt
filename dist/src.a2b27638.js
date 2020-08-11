@@ -135,9 +135,13 @@ var routeTable = {
 route();
 
 function route() {
-  var number = window.location.pathname;
+  var number = window.localStorage.getItem('x');
   console.log(number);
-  number = number || "/1";
+
+  if (!number) {
+    number = '/1';
+  }
+
   var div = routeTable[number];
 
   if (!div) {
@@ -161,7 +165,7 @@ try {
     a.addEventListener('click', function (e) {
       e.preventDefault();
       var href = a.getAttribute('href');
-      history.pushState(null, "page ".concat(href), href);
+      window.localStorage.setItem('x', href);
       onstatechange();
     });
   };

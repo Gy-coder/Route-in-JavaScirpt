@@ -20,9 +20,11 @@ const routeTable = {
 route()
 
 function route() {
-    let number = window.location.pathname
+    let number = window.localStorage.getItem('x')
     console.log(number)
-    number = number || "/1"
+    if (!number) {
+        number = '/1'
+    }
     let div = routeTable[number]
     if (!div) {
         div = document.querySelector(`#div404`)
@@ -38,7 +40,7 @@ for (let a of allA) {
     a.addEventListener('click', (e) => {
         e.preventDefault()
         const href = a.getAttribute('href')
-        history.pushState(null, `page ${href}`, href)
+        window.localStorage.setItem('x', href)
         onstatechange()
     })
 }
